@@ -24,11 +24,16 @@ function getPlayButton() {
   return document.querySelector(`.${playButtonClassName}`)
 }
 
-window.addEventListener('keydown', (e) => {
-  if (
+function isInputFocused() {
+  return (
     document.activeElement instanceof HTMLInputElement ||
-    document.activeElement instanceof HTMLTextAreaElement
-  ) {
+    document.activeElement instanceof HTMLTextAreaElement ||
+    document.activeElement.getAttribute('contenteditable') === 'true'
+  )
+}
+
+window.addEventListener('keydown', (e) => {
+  if (isInputFocused()) {
     return
   }
 
@@ -36,10 +41,7 @@ window.addEventListener('keydown', (e) => {
 })
 
 window.addEventListener('keyup', (e) => {
-  if (
-    document.activeElement instanceof HTMLInputElement ||
-    document.activeElement instanceof HTMLTextAreaElement
-  ) {
+  if (isInputFocused()) {
     return
   }
 
