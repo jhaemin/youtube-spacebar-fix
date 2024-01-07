@@ -15,18 +15,48 @@ const progressBarClassName = 'progress-bar'
 /** Whole class name */
 const playButtonClassName = 'ytp-play-button'
 
-let isProgressBarActive = false
+let previousPlayButtonStatus = null
+
+/**
+ * @returns {HTMLButtonElement}
+ */
+function getPlayButton() {
+  return document.querySelector(`.${playButtonClassName}`)
+}
+
+window.addEventListener('keydown', (e) => {
+  if (
+    document.activeElement instanceof HTMLInputElement ||
+    document.activeElement instanceof HTMLTextAreaElement
+  ) {
+    return
+  }
+
+  previousPlayButtonStatus = getPlayButton()?.title
+})
 
 window.addEventListener('keyup', (e) => {
-  isProgressBarActive =
-    document.activeElement.className.includes(progressBarClassName)
+  if (
+    document.activeElement instanceof HTMLInputElement ||
+    document.activeElement instanceof HTMLTextAreaElement
+  ) {
+    return
+  }
 
-  if (e.code === 'Space' && isProgressBarActive) {
-    e.preventDefault()
+  /**
+   * If the play status doesn't change, click the play/pause button.
+   */
+  if (e.code === 'Space') {
+    setTimeout(() => {
+      const playButton = getPlayButton()
 
-    /** @type {HTMLButtonElement} */
-    const playButton = document.querySelector(`.${playButtonClassName}`)
+      if (!playButton) {
+        return
+      }
 
-    playButton?.click()
+      if (previousPlayButtonStatus === playButton.title) {
+        playButton.click()
+      }
+    }, 0)
   }
 })
