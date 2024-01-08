@@ -7,3 +7,5 @@ By pressing the left or right arrow keys on YouTube video player, the active ele
 This browser extension fixes the problem.
 
 > You can just press K to play or pause the video regardless of the active element. But I'm already used to pressing the space bar.
+
+[Download Chrome Extension](https://chromewebstore.google.com/detail/youtube-space-bar-fix/hnoggpcpecjklffkjahhkkhhkdagheoa)
