@@ -56,8 +56,13 @@ window.addEventListener('keyup', (e) => {
         return
       }
 
-      if (previousPlayButtonStatus === playButton.title) {
-        playButton.click()
+      const rect = playButton.getBoundingClientRect()
+
+      // Only click when the button is visible
+      if (rect.width > 0 && rect.height > 0) {
+        if (previousPlayButtonStatus === playButton.title) {
+          playButton.click()
+        }
       }
     }, 0)
   }
