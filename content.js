@@ -37,7 +37,10 @@ window.addEventListener('keydown', (e) => {
     return
   }
 
-  previousPlayButtonStatus = getPlayButton()?.title
+  if (e.code === 'Space') {
+    e.preventDefault()
+    previousPlayButtonStatus = getPlayButton()?.title
+  }
 })
 
 window.addEventListener('keyup', (e) => {
@@ -49,6 +52,8 @@ window.addEventListener('keyup', (e) => {
    * If the play status doesn't change, click the play/pause button.
    */
   if (e.code === 'Space') {
+    e.preventDefault()
+
     setTimeout(() => {
       const playButton = getPlayButton()
 
